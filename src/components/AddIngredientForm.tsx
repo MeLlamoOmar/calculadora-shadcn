@@ -15,7 +15,7 @@ interface AddIngredientFormProps {
 
 export default function AddIngredientForm({ onAddIngredient }: AddIngredientFormProps) {
   const [name, setName] = useState("")
-  const [unit, setUnit] = useState<Unit | null>(null)
+  const [unit, setUnit] = useState<Unit | "">("")
   const [quantity, setQuantity] = useState(0)
   const [price, setPrice] = useState(0)
 
@@ -32,16 +32,21 @@ export default function AddIngredientForm({ onAddIngredient }: AddIngredientForm
       return
     }
 
+    const unitPrice = price / quantity
+
     onAddIngredient({
       name,
       unit,
       quantity,
-      price
+      price,
+      unitPrice
     })
 
     // Reset form
     setName("")
-    setUnit(null)
+    setUnit("")
+    setPrice(0)
+    setQuantity(0)
   }
 
   return (
@@ -57,11 +62,11 @@ export default function AddIngredientForm({ onAddIngredient }: AddIngredientForm
         />
       </div>
 
-      <div className="space-y-2 flex space-x-5">
+      <div className="space-y-2 grid grid-cols-3 space-x-5">
         <div>
           <Label htmlFor="unit">Unit of Measurement</Label>
-          <Select>
-            <SelectTrigger className="w-[180px]">
+          <Select onValueChange={(value) => setUnit(value as Unit)} value={`${unit}`}>
+            <SelectTrigger>
               <SelectValue placeholder="Select an Unit" />
             </SelectTrigger>
             <SelectContent>
@@ -69,7 +74,7 @@ export default function AddIngredientForm({ onAddIngredient }: AddIngredientForm
                 <SelectLabel>Units</SelectLabel>
                 {
                   Object.values(UnitEnum).map((unit) => (
-                    <SelectItem key={unit} value={unit} onClick={() => setUnit(unit as Unit)}>
+                    <SelectItem key={unit} value={unit}>
                       {unit}
                     </SelectItem>
                   ))
@@ -85,7 +90,6 @@ export default function AddIngredientForm({ onAddIngredient }: AddIngredientForm
             id="precio"
             type="number"
             placeholder="Enter Price"
-            className="w-[180px]"
             value={price}
             onChange={(e) => setPrice(e.target.valueAsNumber)}
             required
@@ -97,7 +101,6 @@ export default function AddIngredientForm({ onAddIngredient }: AddIngredientForm
             id="quantity"
             type="number"
             placeholder="Enter quantity"
-            className="w-[180px]"
             value={quantity}
             onChange={(e) => setQuantity(e.target.valueAsNumber)}
             required

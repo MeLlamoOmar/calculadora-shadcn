@@ -24,6 +24,20 @@ export default function RecipeList({ recipes, ingredients, onDelete }: RecipeLis
     return ingredient ? ingredient.unit : ""
   }
 
+  const getTotalRecipeCost = (): number => {
+    let totalCost = 0
+    recipes.forEach((recipe) => {
+      recipe.ingredients.forEach((Iingredient) => {
+        const ingredient = ingredients.find((i) => i.id === Iingredient.ingredientId)
+        if(ingredient) {
+          totalCost += ingredient.unitPrice * Iingredient.quantity
+        }
+      })
+    })
+
+    return totalCost
+  }
+
   if (recipes.length === 0) {
     return (
       <div className="text-center py-12 text-muted-foreground">
@@ -59,6 +73,7 @@ export default function RecipeList({ recipes, ingredients, onDelete }: RecipeLis
                 </li>
               ))}
             </ul>
+            <p>RD$ {getTotalRecipeCost().toString()}</p>
           </CardContent>
         </Card>
       ))}

@@ -11,6 +11,11 @@ interface IngredientListProps {
 }
 
 export default function IngredientList({ ingredients, onDelete }: IngredientListProps) {
+
+  const parseUnitPrice = (unitPrice: number): string => {
+    return unitPrice.toFixed(2)
+  }
+
   if (ingredients.length === 0) {
     return (
       <div className="text-center py-12 text-muted-foreground">
@@ -21,19 +26,24 @@ export default function IngredientList({ ingredients, onDelete }: IngredientList
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-12 px-4 py-2 font-medium text-sm">
-        <div className="col-span-5">Name</div>
-        <div className="col-span-5">Unit</div>
+      <div className="grid grid-cols-7 px-4 py-2 font-medium text-sm place-items-center">
+        <div className="col-span-2">Name</div>
+        <div className="col-span-1">Price</div>
+        <div className="col-span-1">Quantity</div>
+        <div className="col-span-1">Unit price</div>
         <div className="col-span-2 text-right">Actions</div>
       </div>
 
       {ingredients.map((ingredient) => (
         <Card key={ingredient.id}>
           <CardContent className="p-4">
-            <div className="grid grid-cols-12 items-center">
-              <div className="col-span-5">{ingredient.name}</div>
-              <div className="col-span-5">{ingredient.unit}</div>
+            <div className="grid grid-cols-7 place-items-center">
+              <div className="col-span-2">{ingredient.name}</div>
+              <div className="col-span-1">RD$ {ingredient.price}</div>
+              <div className="col-span-1">{ingredient.quantity} {ingredient.unit}</div>
+              <div className="col-span-1">RD$ {parseUnitPrice(ingredient.unitPrice)}</div>
               <div className="col-span-2 text-right">
+
                 <Button
                   variant="ghost"
                   size="icon"

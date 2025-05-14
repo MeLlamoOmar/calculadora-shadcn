@@ -34,8 +34,8 @@ export default function RecipeCalculator() {
       ...ingredient,
       id: Date.now().toString(),
     }
+    console.table(newIngredient)
     setIngredients([...ingredients, newIngredient])
-    setActiveTab("ingredients")
   }
 
   // Function to delete a recipe
