@@ -6,10 +6,11 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import type { Recipe, Ingredient, RecipeIngredient } from "./RecipeCalculator"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { PlusCircle, Trash2 } from "lucide-react"
+
+import type { Recipe, UnitEnum, Ingredient, RecipeIngredient } from "@/types/types"
 
 interface AddRecipeFormProps {
   onAddRecipe: (recipe: Omit<Recipe, "id">) => void
@@ -61,7 +62,7 @@ export default function AddRecipeForm({ onAddRecipe, ingredients }: AddRecipeFor
     ])
   }
 
-  const updateIngredient = (index: number, field: keyof RecipeIngredient, value: any) => {
+  const updateIngredient = (index: number, field: keyof RecipeIngredient, value: string | number | UnitEnum) => {
     const updated = [...recipeIngredients]
     updated[index] = { ...updated[index], [field]: value }
     setRecipeIngredients(updated)

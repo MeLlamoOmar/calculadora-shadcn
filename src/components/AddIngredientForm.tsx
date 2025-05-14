@@ -28,14 +28,15 @@ export default function AddIngredientForm({ onAddIngredient }: AddIngredientForm
     }
 
     if (!unit) {
-      alert("Please enter a unit of measurement")
+      alert("Please select a unit of measurement")
       return
     }
 
     onAddIngredient({
       name,
       unit,
-      quantity
+      quantity,
+      price
     })
 
     // Reset form
