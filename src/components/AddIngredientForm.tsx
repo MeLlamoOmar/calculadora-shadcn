@@ -50,7 +50,7 @@ export default function AddIngredientForm({ onAddIngredient }: AddIngredientForm
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 h-full">
       <div className="space-y-2">
         <Label htmlFor="ingredient-name">Ingredient Name</Label>
         <Input
@@ -82,7 +82,7 @@ export default function AddIngredientForm({ onAddIngredient }: AddIngredientForm
               </SelectGroup>
             </SelectContent>
           </Select>
-          <p className="text-xs text-muted-foreground">Examples: g, kg, oz, ml, Unidad</p>
+          <p className="text-xs text-muted-foreground text-left">Examples: g, kg, oz, ml, Unidad</p>
         </div>
         <div>
           <Label htmlFor="precio">Price:</Label>
