@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -11,12 +11,18 @@ import AddRecipeForm from "@/components/AddRecipeForm"
 import AddIngredientForm from "@/components/AddIngredientForm"
 
 import type { Recipe, Ingredient } from "@/types/types"
+import { mockIngredients, mockRecipes } from "@/lib/MockData"
 
 export default function RecipeCalculator() {
   // State for recipes and ingredients
   const [recipes, setRecipes] = useState<Recipe[]>([])
   const [ingredients, setIngredients] = useState<Ingredient[]>([])
   const [activeTab, setActiveTab] = useState("recipes")
+
+  useEffect(() => {
+    setRecipes(mockRecipes)
+    setIngredients(mockIngredients)
+  }, [])
 
   // Function to add a new recipe
   const addRecipe = (recipe: Omit<Recipe, "id">) => {

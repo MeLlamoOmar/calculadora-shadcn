@@ -50,7 +50,7 @@ export default function AddIngredientForm({ onAddIngredient }: AddIngredientForm
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 h-full">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-y-5 h-full">
       <div className="space-y-2">
         <Label htmlFor="ingredient-name">Ingredient Name</Label>
         <Input
@@ -62,11 +62,11 @@ export default function AddIngredientForm({ onAddIngredient }: AddIngredientForm
         />
       </div>
 
-      <div className="space-y-2 grid grid-cols-3 space-x-5">
-        <div>
+      <div className="space-y-2 grid sm:grid-cols-3 gap-x-3">
+        <div className="w-full">
           <Label htmlFor="unit">Unit of Measurement</Label>
           <Select onValueChange={(value) => setUnit(value as Unit)} value={`${unit}`}>
-            <SelectTrigger>
+            <SelectTrigger className="w-full">
               <SelectValue placeholder="Select an Unit" />
             </SelectTrigger>
             <SelectContent>
@@ -84,7 +84,7 @@ export default function AddIngredientForm({ onAddIngredient }: AddIngredientForm
           </Select>
           <p className="text-xs text-muted-foreground text-left">Examples: g, kg, oz, ml, Unidad</p>
         </div>
-        <div>
+        <div className="w-full">
           <Label htmlFor="precio">Price:</Label>
           <Input
             id="precio"
@@ -95,7 +95,7 @@ export default function AddIngredientForm({ onAddIngredient }: AddIngredientForm
             required
           />
         </div>
-        <div>
+        <div className="w-full">
           <Label htmlFor="quantity">Quantity</Label>
           <Input
             id="quantity"
